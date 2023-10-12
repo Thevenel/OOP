@@ -33,10 +33,16 @@ class Student:
                     return True
             return False
                 
-
     def add_to_file(self, filename):
-        pass
-
+        if self.find_in_file(filename):
+            return ("Record already exist")
+        else:
+            record_to_add = Student.prep_to_write(self.first_name, self.last_name, self.courses)
+            with open(filename, "a+") as to_write:
+                to_write.write(record_to_add + "\n")
+            return "Record added."
+        
+    
     ## When a method has no relation with the classes method, you declare it as @staticmethod
     @staticmethod 
     def prep_record(line):
@@ -45,6 +51,12 @@ class Student:
         course_details = line[1].rstrip().split(",")
         return first_name, last_name, course_details
     
+    @staticmethod
+    def prep_to_write(first_name, last_name, courses):
+        full_name = first_name+","+last_name
+        courses = ",".join(courses)
+        return full_name + ":" + courses
+
     def __eq__(self, other):
         return self.first_name == other.first_name \
         and self.last_name == other.last_name
@@ -65,9 +77,11 @@ class Student:
 file_name = 'data.txt'
 jay = Student("thevenel","joazard",['python','ruby','javascript'])
 print(jay.find_in_file(file_name))
+print(jay.add_to_file(file_name))
 
+terlly = Student('terlly','sylvain',['python','ruby','javascript'])
+print(terlly.find_in_file(file_name))
+print(terlly.add_to_file(file_name))
+jhon=Student('jhon','doe',['python','java','c']) 
+print(jhon.add_to_file(file_name))
 
-# print(jay)
-
-# terlly,sylvain:python,ruby,javascript
-# john,doe:python,ruby,javascript
