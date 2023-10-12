@@ -16,12 +16,20 @@ class Student:
             print(f"{course} course added successfully for {self.first_name.capitalize()}")
         else:
             print(f"{self.first_name.capitalize()} is already enrolled in {course} course")
-    
+
+    def remove_course(self, course):
+        if course in self.courses:
+            self.courses.remove(course)
+            print(f"{course} course removed successfully")
+        else:
+            print(f"{course} not found")
+
 
 courses_1 = ['python', 'rails', 'javascript']
 courses_2 = ['java', 'rails', 'c']
 jay = Student("Thevenel", "Joazard", courses_1)
 jay.add_course('java')
-jay.add_course('rails')
+jay.remove_course('rails')
+
 
 print(jay.first_name, jay.last_name, jay.courses)
