@@ -24,12 +24,20 @@ class Student:
         else:
             print(f"{course} not found")
 
+    def __len__(self):
+        return len(self.courses)
+    
+    def __repr__(self) -> str:
+        return f"Student('{self.first_name}', '{self.last_name}', {self.courses})"
+
+    def __str__(self):
+        return f"First Name: \t{self.first_name}\
+        \nLast Name: \t{self.last_name}\
+        \nCourses : \t{' - '.join(map(str.capitalize, self.courses))}"
 
 courses_1 = ['python', 'rails', 'javascript']
 courses_2 = ['java', 'rails', 'c']
 jay = Student("Thevenel", "Joazard", courses_1)
-jay.add_course('java')
-jay.remove_course('rails')
 
 
-print(jay.first_name, jay.last_name, jay.courses)
+print(jay)
