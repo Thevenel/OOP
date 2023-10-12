@@ -24,6 +24,31 @@ class Student:
         else:
             print(f"{course} not found")
 
+    def find_in_file(self, filename):
+        with open(filename) as f:
+            for line in f:
+                first_name, last_name, course_details = Student.prep_record(line.strip()) # we use Class name to access a static method
+                student_read_in = Student(first_name, last_name, course_details)
+                if self == student_read_in: # compare the student object with the line in the file
+                    return True
+            return False
+                
+
+    def add_to_file(self, filename):
+        pass
+
+    ## When a method has no relation with the classes method, you declare it as @staticmethod
+    @staticmethod 
+    def prep_record(line):
+        line = line.split(":")
+        first_name, last_name = line[0].split(",")
+        course_details = line[1].rstrip().split(",")
+        return first_name, last_name, course_details
+    
+    def __eq__(self, other):
+        return self.first_name == other.first_name \
+        and self.last_name == other.last_name
+
     def __len__(self):
         return len(self.courses)
     
@@ -35,9 +60,14 @@ class Student:
         \nLast Name: \t{self.last_name}\
         \nCourses : \t{' - '.join(map(str.capitalize, self.courses))}"
 
-courses_1 = ['python', 'rails', 'javascript']
-courses_2 = ['java', 'rails', 'c']
-jay = Student("Thevenel", "Joazard", courses_1)
+# courses_1 = ['python', 'rails', 'javascript']
+# courses_2 = ['java', 'rails', 'c']
+file_name = 'data.txt'
+jay = Student("thevenel","joazard",['python','ruby','javascript'])
+print(jay.find_in_file(file_name))
 
 
-print(jay)
+# print(jay)
+
+# terlly,sylvain:python,ruby,javascript
+# john,doe:python,ruby,javascript
