@@ -72,16 +72,23 @@ class Student:
         \nLast Name: \t{self.last_name}\
         \nCourses : \t{' - '.join(map(str.capitalize, self.courses))}"
 
-# courses_1 = ['python', 'rails', 'javascript']
+
+class StudentAthlete(Student):
+    
+    def __init__(self, first, last, courses=None, sport=None):
+        super().__init__(first, last, courses)
+        self.sport = sport
+
+courses_1 = ['python', 'rails', 'javascript']
 # courses_2 = ['java', 'rails', 'c']
 file_name = 'data.txt'
-jay = Student("thevenel","joazard",['python','ruby','javascript'])
-print(jay.find_in_file(file_name))
-print(jay.add_to_file(file_name))
+# jay = Student("thevenel","joazard",['python','ruby','javascript'])
+# print(jay.find_in_file(file_name))
+# print(jay.add_to_file(file_name))
 
-terlly = Student('terlly','sylvain',['python','ruby','javascript'])
-print(terlly.find_in_file(file_name))
-print(terlly.add_to_file(file_name))
-jhon=Student('jhon','doe',['python','java','c']) 
-print(jhon.add_to_file(file_name))
+terlly = StudentAthlete('terlly','sylvain',courses_1, "football")
+# print(terlly.sport)
+print(isinstance(terlly, Student))
+
+
 
